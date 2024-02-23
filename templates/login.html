@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_login.css') }}">
 </head>
 <body>
+  {% for message in get_flashed_messages() %}
+  <div>{{ message }}</div>
+  {% endfor %}
   <form action="/login" method="post">
     <input type="text" name="username" placeholder="Username" required>
     <input type="password" name="password" placeholder="Password" required>
@@ -12,3 +16,4 @@
   </form>
 </body>
 </html>
+
