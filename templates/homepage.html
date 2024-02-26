@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Page</title>
+</head>
+<body>
+    <div class="container">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <div>{{ form.user_input.label }} {{ form.user_input() }}</div>
+            <div>{{ form.description.label }} {{ form.description() }}</div>
+            <div>{{ form.email.label }} {{ form.email() }}</div>
+            <div>{{ form.submit() }}</div>
+        </form>
+        <form action="/logout" method="get">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</body>
+</html>

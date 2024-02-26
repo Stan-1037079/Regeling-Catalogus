@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os
+from forms import InputForm
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -25,11 +26,26 @@ def logout():
     session.pop('logged_in', None)
     return redirect(url_for('login'))
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
+    form = InputForm()
+    if form.validate_on_submit():
+        return redirect(url_for('subsidie'))  
+    return render_template('homepage.html', form=form)
+
+@app.route('/index')
+def index():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     return render_template('index.html')
+
+@app.route('/subsidie')
+def subsidie():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('subsidie.html')
 
 @app.route('/uw_eigen_idee')
 def uw_eigen_idee():
